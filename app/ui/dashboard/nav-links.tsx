@@ -8,10 +8,23 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import { ForwardRefExoticComponent, RefAttributes, SVGProps } from 'react';
+import { UrlObject } from 'url';
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
-const links = [
+export type Links = {
+  name: string;
+  href: UrlObject | __next_route_internal_types__.RouteImpl<string>;
+  icon: ForwardRefExoticComponent<
+    Omit<SVGProps<SVGSVGElement>, 'ref'> & {
+      title?: string | undefined;
+      titleId?: string | undefined;
+    } & RefAttributes<SVGSVGElement>
+  >;
+};
+
+const links: Links[] = [
   { name: 'Home', href: '/dashboard', icon: HomeIcon },
   {
     name: 'Invoices',
